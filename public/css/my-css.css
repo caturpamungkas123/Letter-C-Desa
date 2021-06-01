@@ -1,0 +1,33 @@
+.table-lurus{
+text-align: center;
+}
+.tr{
+    font-size: 90px;
+}
+.mymodal-text{
+    font-size: 20px;
+}
+#icon-doc:hover{cursor: pointer;}
+
+.text{
+    text-align: right;
+    font-size: 13px;
+}
+#judul {
+    text-align: center;
+}
+
+#halaman {
+    width: auto;
+    height: auto;
+    position: absolute;
+    border: 1px solid;
+    padding-top: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 80px;
+}
+
+.coba {
+    width: -40%;
+}
