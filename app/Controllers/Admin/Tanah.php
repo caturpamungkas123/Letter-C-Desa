@@ -369,8 +369,17 @@ class Tanah extends BaseController
             unlink('img/buku/' . $buku);
         }
 
-        // hapus data dari table
-        $this->tanah->delete(['nop ' => $nop]);
+
+        // cek jumlah data di atble tanah
+        if ($this->tanah->where('nop', $nop)->countAll() === 1) {
+            // hapus data dari table
+            $this->tanah->delete(['nop ' => $nop]);
+            //  hapus data di table pemilik
+            $this->pemilik->hapus($data['nama_pemilik']);
+        } else {
+            // hapus data dari table
+            $this->tanah->delete(['nop ' => $nop]);
+        }
 
         session()->setFlashdata('success', 'Data Berhasil Dihapus');
         return redirect()->to('/admin/data/datatanah');

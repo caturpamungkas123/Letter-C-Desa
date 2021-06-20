@@ -22,4 +22,9 @@ class Pemilik_Model extends Model
     {
         return $this->where('nama_pemilik', $nama)->find();
     }
+
+    public function hapus($nama)
+    {
+        return $this->where('nama_pemilik', $nama)->delete();
+    }
 }
