@@ -4,7 +4,7 @@
 <div class="section-header">
     <h4>Edit Data <?= $data['nop'] ?></h4>
 </div>
-<div class="card">
+<div class="card card-content">
     <div class="card-body">
         <form action="<?= base_url() ?>/admin/tanah/saveedit/<?= $data['nop'] ?>" method="POST" enctype="multipart/form-data">
             <div class="letter">

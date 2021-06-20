@@ -5,13 +5,13 @@
     <h4>Tambah Data Tanah <?= $nama ?></h4>
     <div class="success" data-success="<?= session()->getFlashdata('success') ?>"></div>
 </div>
-<div class="card">
+<div class="card card-content">
     <div class="card-body">
         <form action="<?= base_url() ?>/admin/tanah/insert/<?= $nama ?>" method="POST" enctype="multipart/form-data">
             <div class="letter">
                 <div class="form-group">
                     <label for="blok">No Blok</label>
-                    <input name="no_blok" type="number" class="form-control col-md-3" id="blok">
+                    <input name="no_blok" type="number" autofocus class="form-control col-md-3" id="blok">
                 </div>
                 <hr>
 
@@ -25,7 +25,8 @@
                     </div>
                     <div class="form-group col-md-2">
                         <label for="NAMANOP">Nama NOP</label>
-                        <input type="text" name="nama_nop" class="form-control" disabled="true" value="<?= $nama ?>" id="NAMANOP">
+                        <input type="text" name="" class="form-control" disabled="true" value="<?= $nama ?>" id="NAMANOP">
+                        <input type="hidden" name="nama_nop" value="<?= $nama ?>">
                     </div>
                     <div class="form-group col-md-2">
                         <label for="luastnah">luas Tanah NOP</label>

@@ -17,4 +17,9 @@ class Pemilik_Model extends Model
         }
         return $this->table('pemilik')->like('nama_pemilik', $keywords);
     }
+
+    public function getWhere($nama)
+    {
+        return $this->where('nama_pemilik', $nama)->find();
+    }
 }

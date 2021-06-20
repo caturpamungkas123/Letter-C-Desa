@@ -5,13 +5,13 @@
     <h4>Tambah Data Tanah</h4>
     <div class="success" data-success="<?= session()->getFlashdata('success') ?>"></div>
 </div>
-<div class="card">
+<div class="card card-content">
     <div class="card-body">
         <form action="<?= base_url('admin/data/insert') ?>" method="POST" enctype="multipart/form-data">
             <div class="letter">
                 <div class="form-group">
                     <label for="blok">No Blok</label>
-                    <input name="no_blok" type="number" class="form-control col-md-3" id="blok">
+                    <input name="no_blok" autofocus type="number" class="form-control col-md-3" id="blok">
                 </div>
                 <hr>
 

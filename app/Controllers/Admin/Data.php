@@ -53,6 +53,10 @@ class Data extends BaseController
     public function detailKepemilikan($nama)
     {
         $cari_nama = $this->tanah->detailPemilik($nama)->find();
+        // cek nama ada di table tidak
+        if (empty($cari_nama)) {
+            return view('errors/admin/detail_kepemilikan');
+        }
         foreach ($cari_nama as $cari_nama);
         $dta = [
             'title' => 'Detail Tanah',

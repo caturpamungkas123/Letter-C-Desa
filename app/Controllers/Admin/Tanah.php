@@ -28,7 +28,7 @@ class Tanah extends BaseController
     {
         //  ambil nama
 
-        if (!$this->validate([
+        $validat = [
             'nop' => [
                 'rules' => 'required|is_unique[tanah.nop]',
                 'errors' => [
@@ -37,12 +37,6 @@ class Tanah extends BaseController
                 ]
             ],
             'no_blok' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'Data harus diisi',
-                ]
-            ],
-            'nama_nop' => [
                 'rules' => 'required',
                 'errors' => [
                     'required' => 'Data harus diisi',
@@ -90,6 +84,12 @@ class Tanah extends BaseController
                     'required' => 'Data harus diisi',
                 ]
             ],
+            'nama_nop' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Data harus diisi',
+                ]
+            ],
             'luas_buku_c' => [
                 'rules' => 'required',
                 'errors' => [
@@ -119,11 +119,13 @@ class Tanah extends BaseController
                 'errors' => [
                     'mime_in' => 'Data yang anda masukan bukan gambar',
                 ]
-            ],
-        ])) {
+            ]
+        ];
+
+        if (!$this->validate($validat)) {
+            session()->setFlashdata('success', 'gagal');
             return redirect()->to('/admin/tanah/tambah_data_tanah/' . $nama)->withInput();
         } else {
-
             // cek ada gambar foto buku apa engga
             if ($this->request->getFile('foto_buku_c')->getError() == 4) {
                 $buku_c = 'no-image.png';
@@ -358,11 +360,18 @@ class Tanah extends BaseController
         foreach ($data as $data);
         $tanah = $data['gambar_peta'];
         $buku = $data['gambar_buku_c'];
+
+        // cek nama foto
+        if (!$tanah == 'no-image.png') {
+            unlink('img/tanah/' . $tanah);
+        }
+        if (!$buku == 'no-image.png') {
+            unlink('img/buku/' . $buku);
+        }
+
         // hapus data dari table
         $this->tanah->delete(['nop ' => $nop]);
-        // hapus gambar tanah dari folder
-        unlink('img/tanah/' . $tanah);
-        unlink('img/buku/' . $buku);
+
         session()->setFlashdata('success', 'Data Berhasil Dihapus');
         return redirect()->to('/admin/data/datatanah');
     }

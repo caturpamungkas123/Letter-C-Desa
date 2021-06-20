@@ -44,7 +44,7 @@ $(".hapus").on("click", function (e) {
     Swal.fire({
         title: "Apakah Anda Yakin?",
         text: "Akan Menghapus Data Ini..?",
-        icon: "warning",
+        icon: "question",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",

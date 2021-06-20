@@ -25,4 +25,7 @@
     <link rel="stylesheet" href="<?= base_url() ?>/asset/assets/css/style.css">
     <link rel="stylesheet" href="<?= base_url() ?>/asset/assets/css/components.css">
 
+    <!-- my-css -->
+    <link rel="stylesheet" href="<?= base_url('css/my-css.css') ?>">
+
 </head>
