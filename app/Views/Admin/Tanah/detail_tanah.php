@@ -2,138 +2,102 @@
 <?= $this->section('content') ?>
 
 <div class="section-header">
-    <h4>Data Tanah <?= $nama['nama_pemilik'] ?></h4>
-
-    <div class="section-header-breadcrumb">
-        <a href="<?= base_url() ?>/admin/tanah/tambah_data_tanah/<?= $nama['nama_pemilik'] ?>" class="btn btn-outline-primary"><i class="fa fa-plus"></i> Tambah</a>
-    </div>
-    <div class="section-header-button">
-        <button type="button" class="btn btn-sm btn-success btn-icon icon-left">
-            <i class="fas fa-file"></i> Total Data <span class="badge badge-transparent"><?= $total_data ?></span>
-        </button>
-    </div>
+  <h4>Data Tanah <?= $data['nama_pemilik'] ?></h4>
+  <section class="ml-auto">
+    <a href="<?= base_url() ?>/admin/tanah/edit/<?= $data['id'] ?>" class="btn btn-success mr-3">Edit</a>
+    <div onclick="goBack()" class="btn btn-primary rounded-circle ml-auto"><i class="fa fa-lg fa-arrow-left"></i></div>
+  </section>
 </div>
 
-
-<div class="row">
-    <?php foreach ($pemilik as $key) : ?>
-        <div class="mr-2 col-sm-12 col-md-2">
-            <div class="card p-3 btn icon-document" id="icon-doc" data-toggle="modal" data-target="#modal-<?= $key['nop'] ?>" style="width: 10rem; height: 15rem;">
-                <img src="<?= base_url() ?>/img/document.png" class="card-img-top">
-                <div class="card-body">
-                    <p class="card-text h5"><?= $key['nop'] ?></p>
-                </div>
-            </div>
-        </div>
-    <?php endforeach; ?>
+<div class="col-12 col-md-12 col-lg-12 letter">
+  <div class="card card-content">
+    <div class="card-body p-0">
+      <table style="margin-bottom: 5px;width: 100% ">
+        <tr>
+          <th style="width: 50%;">NAMA WAJIB-IPEDA : <?= $data['nama_pemilik'] ?></th>
+          <th style="width: 20%;">NO: <?= $data['no_buku_c'] ?></th>
+          <th style="width: 30%;">TEMPAT TINGGAL : <?= $data['alamat'] ?></th>
+        </tr>
+        <tr>
+          <th style="padding-left: 150px;">Bin <?= $data['bin'] ?></th>
+        </tr>
+      </table>
+      <table style="width:100%;" class="table-bordered">
+        <thead>
+          <tr>
+            <th colspan="7" class="text-center" style="width:50%">SAWAH</th>
+            <th colspan="7" class="text-center" style="width:50%">TANAH KERING</th>
+          </tr>
+          <tr>
+            <th rowspan="3" class="text-center">Nomer<br>Persil<br>dan<br>huruf<br>bagian<br>persil</th>
+            <th class="text-center" style="writing-mode: vertical-lr;" rowspan="3">Kelas desa</th>
+            <th colspan="4" class="text-center">Menurut daftar<br>perinci</th>
+            <th rowspan="3" class="text-center">Sebab dan<br>Tanggal<br>perubahan</th>
+            <th rowspan="3" class="text-center">Nomer<br>Persil<br>dan<br>huruf<br>bagian<br>persil</th>
+            <th class="text-center" style="writing-mode: vertical-lr;" rowspan="3">Kelas desa</th>
+            <th colspan="4" class="text-center">Menurut daftar<br>perinci</th>
+            <th rowspan="3" class="text-center">Sebab dan<br>Tanggal<br>perubahan</th>
+          </tr>
+          <tr>
+            <th colspan="2" class="text-center">Luas<br>milik</th>
+            <th colspan="2" class="text-center">Ipeda</th>
+            <th colspan="2" class="text-center">Luas<br>milik</th>
+            <th colspan="2" class="text-center">Ipeda</th>
+          </tr>
+          <tr>
+            <th class="text-center">ha</th>
+            <th class="text-center">da</th>
+            <th class="text-center">R.</th>
+            <th class="text-center">S.</th>
+            <th class="text-center">ha</th>
+            <th class="text-center">da</th>
+            <th class="text-center">R.</th>
+            <th class="text-center">S.</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <?php if ($data['jenis_tanah'] == 'sawah') : ?>
+              <td><?= $data['nomer_persil'] ?></td>
+              <td><?= $data['jenis_nop'] ?></td>
+              <td><?= $data['luas_tanah_nop'] ?></td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td><?= date('j-n-y', strtotime($data['diperoleh'])) ?> <?= $data['ket_mutasi'] ?> <?= $data['asal'] ?></td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+            <?php else : ?>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td><?= $data['nomer_persil'] ?></td>
+              <td><?= $data['jenis_nop'] ?></td>
+              <td><?= $data['luas_tanah_nop'] ?></td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td><?= date('j-n-y', strtotime($data['diperoleh'])) ?> <?= $data['ket_mutasi'] ?> <?= $data['asal'] ?></td>
+            <?php endif; ?>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
-
-<!-- modal -->
-<?php foreach ($pemilik as $key) : ?>
-    <div class="modal fade modal-detail" tabindex="-1" role="dialog" id="modal-<?= $key['nop'] ?>">
-        <div class="modal-dialog modal-xl" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">NOP : <?= $key['nop'] ?></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <table class="table">
-                                    <tr>
-                                        <td class="coba">No Blok</td>
-                                        <td class="titik2">:</tdstyle=>
-                                        <td><?= $key['no_block'] ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Luas Tanah NOP</tdstyle=>
-                                        <td>:</td>
-                                        <td><?= $key['luas_tanah_nop'] ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Luas Rumah NOP</td>
-                                        <td>:</td>
-                                        <td><?= $key['luas_rumah_nop'] ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Tahun</td>
-                                        <td>:</td>
-                                        <td><?= $key['tahun'] ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Tagihan</td>
-                                        <td>:</td>
-                                        <td><?= $key['tagihan'] ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td>No Buku C</td>
-                                        <td>:</td>
-                                        <td><?= $key['no_buku_c'] ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Nama Buku C</td>
-                                        <td>:</td>
-                                        <td><?= $key['nama_buku_c'] ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Nomer Persil</td>
-                                        <td>:</td>
-                                        <td><?= $key['nomer_persil'] ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Kelas</td>
-                                        <td>:</td>
-                                        <td><?= $key['kelas'] ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jenis NOP</td>
-                                        <td>:</td>
-                                        <td><?= $key['jenis_nop'] ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Luas Buku C</td>
-                                        <td>:</td>
-                                        <td><?= $key['luas_buku_c'] ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Alamat</td>
-                                        <td>:</td>
-                                        <td><?= $key['alamat'] ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Mutasi</td>
-                                        <td>:</td>
-                                        <td><?= $key['ket_mutasi'] ?></td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="col-md-6 ml-auto">
-                                <table class="table">
-                                    <tr>
-                                        <ul>Gambar Tanah
-                                            <li>
-                                                <img width="400" src="<?= base_url() ?>/img/tanah/<?= $key['gambar_peta'] ?>" alt="">
-                                            </li>
-                                        </ul>
-                                    </tr>
-                                    <tr>
-                                        <ul>Gambar Buku C
-                                            <li>
-                                                <img width="400" src="<?= base_url() ?>/img/buku/<?= $key['gambar_buku_c'] ?>" alt="">
-                                            </li>
-                                        </ul>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    <?php endforeach ?>
-    <!-- end modal -->
-    <?= $this->endSection() ?>
+<!-- image transaksi -->
+<div class="col-12">
+  <div class="card card-content">
+    <img src="<?= base_url('img/transaksi/' . $data['foto_transaksi'] . '') ?>" class="img-fluid img-thumbnail" alt="Images transaksi">
+  </div>
+</div>
+<?= $this->endSEction() ?>

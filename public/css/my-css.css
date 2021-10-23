@@ -1,23 +1,44 @@
+@media print {
 
-.table-lurus{
-text-align: center;
+    .section-header,
+    .background {
+        display: none !important;
+
+    }
+
+    #foto_transaksi {
+        width: 80vh;
+        height: 80vh;
+
+    }
 }
-.tr{
+
+.table-lurus {
+    text-align: center;
+}
+
+.tr {
     font-size: 90px;
 }
-.table-title th{
+
+.table-title th {
     background: rgb(96, 106, 236);
     color: white;
 }
-.mymodal-text{
+
+.mymodal-text {
     font-size: 20px;
 }
-#icon-doc:hover{cursor: pointer;}
 
-.text{
+#icon-doc:hover {
+    cursor: pointer;
+}
+
+.text {
     text-align: right;
     font-size: 13px;
 }
+
 #judul {
     text-align: center;
 }
@@ -36,14 +57,16 @@ text-align: center;
 .coba {
     width: -40%;
 }
-.card-content{
+
+.card-content {
     background: rgb(248, 248, 248);
     box-shadow: 3px 0 10px rgb(139, 136, 136);
 }
-.section-header{
+
+.section-header {
     box-shadow: 1px 2px 12px rgb(146, 140, 140) !important;
 }
-.background{
+
+.background {
     background: #ececec
 }
-

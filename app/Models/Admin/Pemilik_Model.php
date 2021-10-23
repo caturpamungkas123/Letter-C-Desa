@@ -7,24 +7,18 @@ use CodeIgniter\Model;
 class Pemilik_Model extends Model
 {
     protected $table      = 'pemilik';
-    protected $allowedFields = ['nama_pemilik'];
+    protected $allowedFields = ['nama_pemilik', 'no_buku_c', 'bin'];
 
-    // mencari nama data 
-    public function getKeywords($keywords = null)
+    public function dataPemilik($keywords = null)
     {
-        if ($keywords == null) {
+        if ($keywords !== null) {
+            return $this->like('bin', $keywords)->orLike('nama_pemilik', $keywords)->orLike('no_buku_c', $keywords)->find();
+        } else {
             return $this->findAll();
         }
-        return $this->table('pemilik')->like('nama_pemilik', $keywords);
     }
-
-    public function getWhere($nama)
+    public function hapus($nama, $noBuku)
     {
-        return $this->where('nama_pemilik', $nama)->find();
-    }
-
-    public function hapus($nama)
-    {
-        return $this->where('nama_pemilik', $nama)->delete();
+        return $this->where('nama_pemilik', $nama)->where('no_buku_c', $noBuku)->delete();
     }
 }

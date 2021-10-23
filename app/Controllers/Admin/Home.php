@@ -24,4 +24,8 @@ class Home extends BaseController
         ];
         return view('admin/dashboard', $dta);
     }
+    public function auth()
+    {
+        return view('auth/index');
+    }
 }

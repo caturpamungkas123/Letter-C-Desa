@@ -25,9 +25,8 @@ class Data extends BaseController
         }
 
         $dta = [
-            'titile' => 'Data Tanah',
+            'title' => 'Data Tanah',
             'data' => $tanah->paginate(5, 'tanah'),
-            'tanah' => $this->tanah->findAll(),
             'pager' => $tanah->pager
         ];
         return view('admin/tanah/data_tanah', $dta);
@@ -37,22 +36,19 @@ class Data extends BaseController
     {
         $keywords = $this->request->getVar('keywords');
         if ($keywords) {
-            $pemilik = $this->pemilik->getKeywords($keywords);
+            $pemilik = $this->pemilik->dataPemilik($keywords);
         } else {
-            $pemilik = $this->pemilik;
+            $pemilik = $this->pemilik->dataPemilik();
         }
-
         $dta = [
             'title' => 'Data Kepemilikan',
-            'pemilik' => $pemilik->paginate(5, 'pemilik'),
-            'pager' => $this->pemilik->pager
+            'pemilik' => $pemilik,
         ];
         return view('admin/tanah/data_pemilik', $dta);
     }
-
-    public function detailKepemilikan($nama)
+    public function detailKepemilikan($noBuku, $nama)
     {
-        $cari_nama = $this->tanah->detailPemilik($nama)->find();
+        $cari_nama = $this->tanah->detailPemilik($noBuku, $nama)->find();
         // cek nama ada di table tidak
         if (empty($cari_nama)) {
             return view('errors/admin/detail_kepemilikan');
@@ -61,10 +57,11 @@ class Data extends BaseController
         $dta = [
             'title' => 'Detail Tanah',
             'nama' => $cari_nama,
-            'pemilik' => $this->tanah->detailPemilik($nama)->find(),
-            'total_data' => $this->tanah->detailPemilik($nama)->countAllResults(false)
+            'noBuku' => $noBuku,
+            'pemilik' => $this->tanah->detailPemilik($noBuku, $nama)->find(),
+            'total_data' => $this->tanah->detailPemilik($noBuku, $nama)->countAllResults(false)
         ];
-        return view('admin/tanah/detail_tanah', $dta);
+        return view('admin/tanah/detail_tanah_pemilik', $dta);
     }
     // end kepemilikan
     public function tambah()
@@ -80,41 +77,16 @@ class Data extends BaseController
     public function insert()
     {
         if (!$this->validate([
-            'nop' => [
-                'rules' => 'required|is_unique[tanah.nop]',
-                'errors' => [
-                    'required' => 'Data harus diisi',
-                    'is_unique' => 'Data sudah terdaftar'
-                ]
-            ],
-            'no_blok' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'Data harus diisi',
-                ]
-            ],
             'nama_nop' => [
                 'rules' => 'required',
                 'errors' => [
                     'required' => 'Data harus diisi',
                 ]
             ],
-            'luas_tanah_nop' => [
+            'bin' => [
                 'rules' => 'required',
                 'errors' => [
-                    'required' => 'Data harus diisi',
-                ]
-            ],
-            'tahun' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'Data harus diisi',
-                ]
-            ],
-            'tagihan' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'Data harus diisi',
+                    'required' => 'data harus diisi'
                 ]
             ],
             'no_buku_c' => [
@@ -123,10 +95,29 @@ class Data extends BaseController
                     'required' => 'Data harus diisi',
                 ]
             ],
-            'nama_buku_c' => [
+            'asal' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'data harus diisi'
+                ]
+            ],
+            'diperoleh' => [
                 'rules' => 'required',
                 'errors' => [
                     'required' => 'Data harus diisi',
+                ]
+            ],
+            'luas_tanah_nop' => [
+                'rules' => 'required', 'numeric',
+                'errors' => [
+                    'required' => 'Data harus diisi',
+                    'numeric' => 'masukan data yang valid'
+                ]
+            ],
+            'jenis_nop' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Data harus diisi'
                 ]
             ],
             'nomer_persil' => [
@@ -135,22 +126,17 @@ class Data extends BaseController
                     'required' => 'Data harus diisi',
                 ]
             ],
-            'kelas' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'Data harus diisi',
-                ]
-            ],
             'luas_buku_c' => [
-                'rules' => 'required',
+                'rules' => 'required', 'numeric',
                 'errors' => [
                     'required' => 'Data harus diisi',
+                    'numeric' => 'data yang valid'
                 ]
             ],
-            'alamat' => [
+            'rw' => [
                 'rules' => 'required',
                 'errors' => [
-                    'required' => 'Data harus diisi',
+                    'required' => 'Data harus diisi'
                 ]
             ],
             'ket_mutasi' => [
@@ -159,70 +145,62 @@ class Data extends BaseController
                     'required' => 'Data harus diisi',
                 ]
             ],
-            'foto_buku_c' => [
-                'rules' => 'mime_in[foto_buku_c,image/png,image/jpg,image/jpeg]',
+            'foto_transaksi' => [
+                'rules' => 'mime_in[foto_transaksi,image/png,image/jpg,image/jpeg]',
                 'errors' => [
-                    'mime_in' => 'Data yang anda masukan bukan gambar',
+                    'mime_in' => 'Data bukan gambar'
                 ]
-            ],
-            'foto_tanah' => [
-                'rules' => 'mime_in[foto_tanah,image/png,image/jpg,image/jpeg]',
-                'errors' => [
-                    'mime_in' => 'Data yang anda masukan bukan gambar',
-                ]
-            ],
+            ]
         ])) {
             return redirect()->to('/admin/data/tambah')->withInput();
         } else {
-
             // cek ada gambar foto buku apa engga
-            if ($this->request->getFile('foto_buku_c')->getError() == 4) {
-                $buku_c = 'no-image.png';
+            if ($this->request->getFile('foto_transaksi')->getError() == 4) {
+                $transaksi = 'no-image.png';
             } else {
-                $gambar_buku_c = $this->request->getFile('foto_buku_c');
-                $buku_c = $gambar_buku_c->getRandomName();
-                $gambar_buku_c->move('img/buku', $buku_c);
+                $foto_transaksi = $this->request->getFile('foto_transaksi');
+                $transaksi = $foto_transaksi->getRandomName();
+                $foto_transaksi->move('img/transaksi', $transaksi);
             }
-
-            // cek ada gambar foto tanah apa engga
-            if ($this->request->getFile('foto_tanah')->getError() == 4) {
-                $tanah = 'no-image.png';
+            $jnsTanah = $this->request->getVar('jenis_nop');
+            if (
+                $jnsTanah == 'DI' ||
+                $jnsTanah == 'DII' ||
+                $jnsTanah == 'DIII' ||
+                $jnsTanah == 'DIV' ||
+                $jnsTanah == 'DV' ||
+                $jnsTanah == 'DVI'
+            ) {
+                $jenisTanah = 'tanah_kering';
             } else {
-                $gambar_peta = $this->request->getFile('foto_tanah');
-                $tanah = $gambar_peta->getRandomName();
-                $gambar_peta->move('img/tanah', $tanah);
+                $jenisTanah = 'sawah';
             }
-            // slug
-            $slug = url_title($this->request->getVar('nama_nop'), '-', true);
 
             $value_tanah = [
-                'nop' => $this->request->getVar('nop'),
-                'no_block' => $this->request->getVar('no_blok'),
                 'nama_pemilik' => $this->request->getVar('nama_nop'),
-                'slug' => $slug,
+                'bin' => $this->request->getVar('bin'),
+                'asal' => $this->request->getVar('asal'),
                 'luas_tanah_nop' => $this->request->getVar('luas_tanah_nop'),
-                'luas_rumah_nop' => $this->request->getVar('luas_rumah_nop'),
-                'tahun' => $this->request->getVar('tahun'),
-                'tagihan' => $this->request->getVar('tagihan'),
+                'diperoleh' => $this->request->getVar('diperoleh'),
                 'no_buku_c' => $this->request->getVar('no_buku_c'),
-                'nama_buku_c' => $this->request->getVar('nama_buku_c'),
+                'nama_buku_c' => $this->request->getVar('nama_nop'),
                 'nomer_persil' => $this->request->getVar('nomer_persil'),
-                'kelas' => $this->request->getVar('kelas'),
                 'jenis_nop' => $this->request->getVar('jenis_nop'),
+                'jenis_tanah' => $jenisTanah,
                 'luas_buku_c' => $this->request->getVar('luas_buku_c'),
-                'alamat' => $this->request->getVar('alamat'),
+                'alamat' => $this->request->getVar('rw'),
                 'ket_mutasi' => $this->request->getVar('ket_mutasi'),
-                'gambar_peta' => $tanah,
-                'gambar_buku_c' => $buku_c
+                'foto_transaksi' => $transaksi
             ];
             $this->tanah->insert($value_tanah);
-            // cek apakah data sudah terdaftar di table pemilik
-            if ($this->validate([
-                'nama_nop' => 'is_unique[pemilik.nama_pemilik]'
-            ])) {
 
+            if ($this->validate([
+                'no_buku_c' => 'is_unique[pemilik.no_buku_c]'
+            ])) {
                 $value_pemilik = [
-                    'nama_pemilik' => $this->request->getVar('nama_nop')
+                    'nama_pemilik' => $this->request->getVar('nama_nop'),
+                    'no_buku_c' => $this->request->getVar('no_buku_c'),
+                    'bin' => $this->request->getVar('bin')
                 ];
                 $this->pemilik->insert($value_pemilik);
             }

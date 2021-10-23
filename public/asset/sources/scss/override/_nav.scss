@@ -1,11 +1,12 @@
 .nav-tabs .nav-item .nav-link {
   color: color(primary);
+
   &.active {
     color: #000;
   }
 }
 
-.tab-content > .tab-pane {
+.tab-content>.tab-pane {
   padding: 10px 0;
   line-height: 24px;
 }
@@ -17,22 +18,28 @@
 }
 
 .nav-pills {
-  .nav-link.active, .show > .nav-link {
+
+  .nav-link.active,
+  .show>.nav-link {
     color: #fff;
     background-color: color(primary);
   }
+
   .nav-item .nav-link {
     color: color(primary);
     padding-left: 15px !important;
     padding-right: 15px !important;
+
     &:hover {
       background-color: color_lighten(primary, 31%);
     }
+
     &.active {
       @include button-shadow(primary);
       color: #fff;
       background-color: color(primary);
     }
+
     .badge {
       padding: 5px 8px;
       margin-left: 5px;
@@ -43,7 +50,12 @@
 .nav {
   .nav-item {
     .nav-link {
-      .ion, .fas, .far, .fab, .fal {
+
+      .ion,
+      .fas,
+      .far,
+      .fab,
+      .fal {
         margin-right: 3px;
         font-size: 12px;
       }

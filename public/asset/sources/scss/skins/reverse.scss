@@ -7,26 +7,30 @@ body.skin-reverse {
       &:after {
         background-color: color(primary);
       }
+
       .sidebar-menu {
         li {
           &.active {
-            > a {
+            >a {
               background-color: #fff;
               box-shadow: none;
               color: color(primary);
             }
           }
+
           &.active ul.dropdown-menu,
           ul.dropdown-menu {
             li {
               a {
                 background-color: transparent;
                 color: color_lighten(font, 10%);
+
                 &:hover {
-                    background-color: color_lighten(light, 7.6%);
-                    color: color(dark);
+                  background-color: color_lighten(light, 7.6%);
+                  color: color(dark);
                 }
               }
+
               &.active {
                 a {
                   background-color: transparent !important;
@@ -39,22 +43,28 @@ body.skin-reverse {
       }
     }
   }
+
   .main-sidebar {
     background-color: color(primary);
+
     .sidebar-brand {
       a {
         color: #fff;
       }
     }
+
     .sidebar-menu {
       li {
         a {
           color: color_lighten(primary, 25%);
+
           &:hover {
             background-color: #6070e5;
           }
         }
+
         &.active {
+
           a,
           a:hover,
           ul.dropdown-menu li a:hover,
@@ -62,18 +72,22 @@ body.skin-reverse {
             background-color: #6070e5;
           }
         }
+
         &.menu-header {
           color: #afb7ff;
         }
+
         ul.dropdown-menu {
           li {
             a {
               color: color_lighten(primary, 25%);
+
               &:hover {
                 background-color: color(primary);
                 color: #fff;
               }
             }
+
             &.active {
               a {
                 color: #fff;
@@ -88,15 +102,18 @@ body.skin-reverse {
   .navbar-bg,
   .navbar {
     background-color: #fff;
+
     .nav-link.nav-link-user,
     .nav-link {
       color: #000;
+
       &:hover {
         color: lighten(#000, 10%);
       }
     }
 
     .form-inline {
+
       .btn,
       .form-control {
         background-color: color_lighten(primary, 31.5%);
