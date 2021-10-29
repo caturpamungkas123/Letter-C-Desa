@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class Tanah_Model extends Model
 {
     protected $table      = 'tanah';
-    protected $allowedFields = ['nama_pemilik', 'bin', 'asal', 'luas_tanah_nop', 'diperoleh', 'no_buku_c', 'nama_buku_c', 'nomer_persil', 'jenis_nop', 'jenis_tanah', 'luas_buku_c', 'alamat', 'ket_mutasi', 'foto_transaksi'];
+    protected $allowedFields = ['asal_desa', 'nama_pemilik', 'bin', 'asal', 'luas_tanah_nop', 'diperoleh', 'no_buku_c', 'nama_buku_c', 'nomer_persil', 'jenis_nop', 'jenis_tanah', 'luas_buku_c', 'alamat', 'ket_mutasi', 'foto_transaksi'];
 
     public function insertData($data)
     {

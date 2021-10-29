@@ -94,7 +94,7 @@
                         <label for="alamat">Tempat Tinggal</label>
                         <div class="row">
                             <div class="col">
-                                <select name="rw" id="rw" class="form-control selectric <?= ($validat->hasError('rw') ? 'is-invalid' : '') ?>">
+                                <select onchange="cekLive()" name="rw" id="rw" class="form-control selectric <?= ($validat->hasError('rw') ? 'is-invalid' : '') ?>">
                                     <option value="<?= $data['alamat'] ?>"><?= $data['alamat'] ?></option>
                                     <option value="I">I</option>
                                     <option value="II">II</option>
@@ -113,10 +113,15 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="form-group col-md-3">
+                        <label for="almt">Alamat</label>
+                        <input type="text" class="form-control" value="<?= $data['asal_desa'] ?>" id="almt" name="luar_desa">
+                        <small class="form-text form-muted">Diisi bilamana diluar desa Ampih</small>
+                    </div>
                 </div>
 
                 <div class="form-row">
-
                     <div class="form-group col-md-3">
                         <label for="ketmutasi">Ket.Mutasi</label>
                         <select name="ket_mutasi" class="form-control selectric <?= ($validat->hasError('ket_mutasi') ? 'is-invalid' : '') ?>" id="mutasi">

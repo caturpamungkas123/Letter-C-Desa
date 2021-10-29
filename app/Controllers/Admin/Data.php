@@ -189,6 +189,7 @@ class Data extends BaseController
                 'jenis_tanah' => $jenisTanah,
                 'luas_buku_c' => $this->request->getVar('luas_buku_c'),
                 'alamat' => $this->request->getVar('rw'),
+                'asal_desa' => $this->request->getVar('luar_desa'),
                 'ket_mutasi' => $this->request->getVar('ket_mutasi'),
                 'foto_transaksi' => $transaksi
             ];

@@ -93,13 +93,13 @@
                         <label for="alamat">Tempat Tinggal</label>
                         <div class="row">
                             <div class="col">
-                                <select name="rw" id="rw" class="form-control selectric <?= ($validat->hasError('rw') ? 'is-invalid' : '') ?>">
+                                <select onchange="cekLive()" name="rw" id="rw" class="form-control selectric <?= ($validat->hasError('rw') ? 'is-invalid' : '') ?>">
                                     <option value="<?= old('rw') ?>"><?= (old('rw') == null ? '- - + - -' : old('rw')) ?></option>
-                                    <option value="I">I</option>
-                                    <option value="II">II</option>
-                                    <option value="III">III</option>
-                                    <option value="IV">IV</option>
-                                    <option value="V">V</option>
+                                    <option value="I AMPIH">I AMPIH</option>
+                                    <option value="II AMPIH">II AMPIH</option>
+                                    <option value="III AMPIH">III AMPIH</option>
+                                    <option value="IV AMPIH">IV AMPIH</option>
+                                    <option value="V AMPIH">V AMPIH</option>
                                     <option disabled>------------
                                     </option>
                                     <option value="VL">VL</option>
@@ -111,6 +111,11 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="almt">Alamat</label>
+                        <input type="text" class="form-control" id="almt" name="luar_desa" disabled>
+                        <small class="form-text form-muted">Diisi bilamana diluar desa Ampih</small>
                     </div>
                 </div>
                 <div class="form-row">

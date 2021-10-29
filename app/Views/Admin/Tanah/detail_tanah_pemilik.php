@@ -91,7 +91,7 @@
                                     <tr>
                                         <td>Tempat Tinggal</td>
                                         <td>:</td>
-                                        <td><?= $key['alamat'] ?></td>
+                                        <td><?= ($key['alamat'] == 'IIIL' || $key['alamat'] == 'VL' || $key['alamat'] == 'IVL' ? $key['alamat'] . ' ' . $key['asal_desa'] : $key['alamat']) ?></td>
                                     </tr>
                                     <tr>
                                         <td>Mutasi</td>

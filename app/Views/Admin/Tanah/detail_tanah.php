@@ -16,7 +16,7 @@
         <tr>
           <th style="width: 50%;">NAMA WAJIB-IPEDA : <?= $data['nama_pemilik'] ?></th>
           <th style="width: 20%;">NO: <?= $data['no_buku_c'] ?></th>
-          <th style="width: 30%;">TEMPAT TINGGAL : <?= $data['alamat'] ?></th>
+          <th style="width: 30%;">TEMPAT TINGGAL : <?= ($data['alamat'] == 'VL' || $data['alamat'] == 'IIIL' || $data['alamat'] == 'IVL' ? $data['alamat'] . ' ' . $data['asal_desa'] : $data['alamat']) ?></th>
         </tr>
         <tr>
           <th style="padding-left: 150px;">Bin <?= $data['bin'] ?></th>

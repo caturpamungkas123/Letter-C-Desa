@@ -7,7 +7,6 @@
     <div class="display-4">No Data</div>
 </div>
 <div class="row justify-content-center">
-
     <svg id="9af98f83-10c5-4067-bc84-20554b2827d8" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="800.54" height="589.93" viewBox="0 0 1009.54 789.93">
         <defs>
             <linearGradient id="07c62293-c0d3-4921-8e06-4e39241449cd" x1="318.22" y1="488.45" x2="630.35" y2="488.45" gradientUnits="userSpaceOnUse">

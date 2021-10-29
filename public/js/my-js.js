@@ -45,3 +45,16 @@ $(".hapus").on("click", function (e) {
 function goBack() {
   window.history.back();
 }
+
+function cekLive() {
+  if (
+    document.querySelector("#rw").value == "VL" ||
+    document.querySelector("#rw").value == "IIIL" ||
+    document.querySelector("#rw").value == "IVL"
+  ) {
+    document.querySelector("#almt").removeAttribute("disabled");
+  } else {
+    document.querySelector("#almt").value = "";
+    document.querySelector("#almt").setAttribute("disabled", "");
+  }
+}
